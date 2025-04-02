@@ -1,10 +1,46 @@
-name: Simple Workflow
+name: Environment Variables
 
 on: push
 
-jobs:
-    Example:
-        runs-on: macos-latest
+env:
+  DRAGON: I'm Dragon
 
-        steps:
-            - run: echo "Hello, World!"
+jobs:
+  Example1:
+    runs-on: ubuntu-latest
+    env:
+      OGRE: I'm Ogre
+    
+    steps:
+      - name: Who are you? 1
+        env:
+          WITCH: I'm Witch
+        run: |
+          echo "DRAGON=$DRAGON"
+          echo "DRAGON=${{ env.DRAGON }}"
+          echo "OGRE=$OGRE"
+          echo "OGRE=${{ env.OGRE }}"
+          echo "WITCH=$WITCH"
+          echo "WITCH=${{ env.WITCH }}"
+
+      - name: Who are you? 2
+        run: |
+          echo "DRAGON=$DRAGON"
+          echo "DRAGON=${{ env.DRAGON }}"
+          echo "OGRE=$OGRE"
+          echo "OGRE=${{ env.OGRE }}"
+          echo "WITCH=$WITCH"
+          echo "WITCH=${{ env.WITCH }}"
+
+  Example2:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Who are you? 3
+        run: |
+          echo "DRAGON=$DRAGON"
+          echo "DRAGON=${{ env.DRAGON }}"
+          echo "OGRE=$OGRE"
+          echo "OGRE=${{ env.OGRE }}"
+          echo "WITCH=$WITCH"
+          echo "WITCH=${{ env.WITCH }}"
